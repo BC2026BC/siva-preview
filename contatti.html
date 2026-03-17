@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contatti — SiVA Italia</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300;1,400&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --c:#0098A8;--cl:#00B4C6;--cp:rgba(0,152,168,0.07);
+  --r:#D4271C;--d:#1A1A2A;--dm:#2D3142;
+  --g:#6B7280;--gl:#9CA3AF;--gp:#F5F7F9;--w:#fff;--b:#E5E9ED;
+  --f:'Barlow',sans-serif;--sc:'Caveat',cursive;
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--w);color:var(--d);font-family:var(--f);overflow-x:hidden;line-height:1.6}
+img{max-width:100%;display:block;object-fit:cover}
+a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:var(--c);border-radius:2px}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:68px;
+  display:flex;align-items:center;justify-content:space-between;padding:0 4vw;
+  background:rgba(255,255,255,0.97);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(0,152,168,0.1);transition:box-shadow .3s}
+.nav.sc{box-shadow:0 2px 20px rgba(0,0,0,.08)}
+.nav-logo img{height:42px;width:auto}
+.nm{display:flex;align-items:center;list-style:none}
+.nm>li{position:relative}
+.nm>li>a{display:flex;align-items:center;gap:.3rem;padding:0 1rem;height:68px;
+  font-size:.79rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--d);transition:color .2s}
+.nm>li>a:hover,.nm>li>a.act{color:var(--c)}
+.nm>li>a .ar{font-size:.55rem;transition:transform .2s}
+.nm>li:hover>a .ar{transform:rotate(180deg)}
+.dd{position:absolute;top:100%;left:0;background:var(--w);
+  border-top:2px solid var(--c);border:1px solid var(--b);
+  min-width:220px;opacity:0;visibility:hidden;transform:translateY(-6px);
+  transition:all .25s cubic-bezier(.16,1,.3,1);
+  box-shadow:0 8px 28px rgba(0,0,0,.1);z-index:200}
+.nm>li:hover .dd{opacity:1;visibility:visible;transform:none}
+.dd a{display:block;padding:.68rem 1.2rem;font-size:.78rem;font-weight:500;
+  color:var(--g);border-bottom:1px solid var(--b);transition:all .2s}
+.dd a:last-child{border-bottom:none}
+.dd a:hover{color:var(--c);background:var(--cp);padding-left:1.6rem}
+.ncta{background:var(--c)!important;color:var(--w)!important;
+  padding:.5rem 1.2rem!important;height:auto!important;
+  border-radius:2px;margin-left:.8rem;font-size:.76rem!important;
+  letter-spacing:.07em;transition:background .2s!important}
+.ncta:hover{background:var(--cl)!important}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.hbg span{display:block;width:22px;height:2px;background:var(--d);border-radius:1px;transition:.3s}
+.mmenu{display:none;position:fixed;top:68px;left:0;right:0;bottom:0;
+  background:var(--w);z-index:999;overflow-y:auto;padding:1.5rem 4vw;
+  transform:translateX(-100%);transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.mmenu.op{transform:none}
+.mmenu a{display:block;padding:.82rem 0;font-size:.92rem;font-weight:600;
+  color:var(--d);border-bottom:1px solid var(--b);transition:color .2s,padding-left .2s}
+.mmenu a:hover{color:var(--c);padding-left:.4rem}
+.mmenu .ms{padding-left:1rem;font-size:.82rem;font-weight:400;color:var(--g)}
+
+footer{background:var(--d)}
+.ftop{padding:3.5rem 4vw 2.5rem;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:2.5vw;border-bottom:1px solid rgba(255,255,255,.06)}
+.ftbrand img{height:46px;width:auto;margin-bottom:1rem;filter:brightness(1.1)}
+.ftbrand p{font-size:.78rem;font-weight:300;color:rgba(255,255,255,.32);line-height:1.8;max-width:260px}
+.ftbrand p strong{color:rgba(255,255,255,.62);font-weight:500}
+.ftcol h4{font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.88);margin-bottom:1rem}
+.ftcol ul{list-style:none}
+.ftcol li{margin-bottom:.48rem}
+.ftcol a{font-size:.78rem;font-weight:300;color:rgba(255,255,255,.32);display:block;
+  transition:color .2s,padding-left .2s}
+.ftcol a:hover{color:var(--c);padding-left:.35rem}
+.fbot{padding:1.3rem 4vw;display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:1rem}
+.fbot span{font-size:.7rem;font-weight:300;color:rgba(255,255,255,.2)}
+
+.rv{opacity:0;transform:translateY(22px);transition:opacity .75s ease,transform .75s ease}
+.rv.vi{opacity:1;transform:none}
+.rvl{opacity:0;transform:translateX(-22px);transition:opacity .8s ease,transform .8s ease}
+.rvl.vi{opacity:1;transform:none}
+.rvr{opacity:0;transform:translateX(22px);transition:opacity .8s ease,transform .8s ease}
+.rvr.vi{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+
+.sec{padding:8vh 4vw}
+.mw{max-width:1200px;margin:0 auto}
+.ey{display:inline-flex;align-items:center;gap:.7rem;font-size:.67rem;font-weight:700;
+  letter-spacing:.25em;text-transform:uppercase;color:var(--c);margin-bottom:.8rem}
+.ey::before{content:'';width:22px;height:1px;background:var(--c)}
+.st{font-size:clamp(1.8rem,3.6vw,2.8rem);font-weight:900;color:var(--d);
+  line-height:1.08;letter-spacing:-.02em;margin-bottom:.9rem}
+.st .ac{color:var(--c)}
+.st.lt{color:var(--w)}
+.sd{font-size:.9rem;font-weight:300;color:var(--g);line-height:1.85;max-width:580px}
+.bp{background:var(--c);color:var(--w);padding:.82rem 2rem;font-weight:700;
+  font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;border-radius:2px;
+  display:inline-block;transition:all .25s;box-shadow:0 4px 18px rgba(0,152,168,.3)}
+.bp:hover{background:var(--cl);transform:translateY(-2px)}
+.bg-btn{border:1.5px solid var(--b);color:var(--d);padding:.82rem 2rem;font-weight:600;
+  font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;border-radius:2px;
+  display:inline-block;transition:all .25s}
+.bg-btn:hover{border-color:var(--c);color:var(--c);transform:translateY(-2px)}
+
+/* HERO INTERNO */
+.page-hero{min-height:52vh;position:relative;overflow:hidden;
+  display:flex;align-items:flex-end;padding:0 4vw 6vh;margin-top:68px}
+.ph-bg{position:absolute;inset:0;z-index:0}
+.ph-bg img{width:100%;height:100%;object-fit:cover}
+.ph-ov{position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to top,rgba(26,26,42,.88) 0%,rgba(26,26,42,.3) 60%,transparent 100%)}
+.ph-content{position:relative;z-index:2;max-width:700px}
+.ph-tag{font-size:.68rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--c);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+.ph-tag::before{content:'';width:20px;height:1px;background:var(--c)}
+.ph-title{font-size:clamp(2.4rem,5vw,4.2rem);font-weight:900;color:var(--w);
+  line-height:.97;letter-spacing:-.025em;margin-bottom:.8rem}
+.ph-title .ac{color:var(--c)}
+.ph-desc{font-size:.92rem;font-weight:300;color:rgba(255,255,255,.62);
+  max-width:520px;line-height:1.8}
+.ph-script{font-family:var(--sc);font-size:1.3rem;color:rgba(255,255,255,.45);margin-top:.6rem}
+
+/* PRODOTTI GRID */
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;
+  max-width:1200px;margin:3rem auto 0}
+.prod-card{overflow:hidden;border:1px solid var(--b);background:var(--w);
+  transition:transform .3s,box-shadow .3s}
+.prod-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.1)}
+.prod-img{width:100%;height:220px;overflow:hidden;position:relative}
+.prod-img img{width:100%;height:100%;object-fit:cover;
+  transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.prod-card:hover .prod-img img{transform:scale(1.06)}
+.prod-info{padding:1.2rem}
+.prod-label{font-size:.62rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--c);margin-bottom:.4rem}
+.prod-title{font-size:.95rem;font-weight:700;color:var(--d);margin-bottom:.4rem}
+.prod-desc{font-size:.78rem;font-weight:300;color:var(--g);line-height:1.65}
+
+/* TESTO + IMMAGINE */
+.ti-layout{display:grid;grid-template-columns:1fr 1fr;gap:5vw;
+  align-items:center;max-width:1200px;margin:0 auto}
+.ti-layout.rev{direction:rtl}
+.ti-layout.rev>*{direction:ltr}
+.ti-photo{width:100%;aspect-ratio:4/3;overflow:hidden}
+.ti-photo img{width:100%;height:100%;object-fit:cover;
+  transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.ti-photo:hover img{transform:scale(1.04)}
+.ti-text p{font-size:.9rem;font-weight:300;color:var(--g);line-height:1.9;margin-bottom:1rem}
+.ti-text p strong{color:var(--d);font-weight:600}
+.feature-list{list-style:none;margin-top:1.5rem;display:flex;flex-direction:column;gap:.7rem}
+.feature-list li{display:flex;align-items:flex-start;gap:.8rem;
+  font-size:.88rem;font-weight:400;color:var(--d)}
+.feature-list li::before{content:'';width:6px;height:6px;background:var(--c);
+  border-radius:50%;flex-shrink:0;margin-top:7px}
+.feature-list li span{color:var(--g);font-weight:300;font-size:.82rem;display:block;margin-top:.1rem}
+
+/* CITAZIONE */
+.quote{padding:5vh 4vw;background:var(--c);position:relative;overflow:hidden;text-align:center}
+.qwav{position:absolute;bottom:-15%;right:-3%;opacity:.07;pointer-events:none}
+.qtxt{font-family:var(--sc);font-size:clamp(1.6rem,3.8vw,2.8rem);color:var(--w);
+  max-width:800px;margin:0 auto;line-height:1.38;position:relative;z-index:1}
+.qauth{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);margin-top:1.3rem;position:relative;z-index:1}
+
+/* CONTATTI */
+.cwrap{display:grid;grid-template-columns:1fr 1.4fr;gap:5vw;
+  align-items:start;max-width:1200px;margin:0 auto}
+.cdet{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.2rem}
+.cico{width:38px;height:38px;flex-shrink:0;border-radius:3px;
+  background:var(--cp);border:1px solid rgba(0,152,168,.15);
+  display:flex;align-items:center;justify-content:center}
+.cico svg{width:16px;height:16px;stroke:var(--c);fill:none;stroke-width:1.5}
+.ctxt strong{display:block;font-size:.63rem;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--c);margin-bottom:.2rem}
+.ctxt span{font-size:.85rem;color:var(--d)}
+.socrow{display:flex;gap:.7rem;margin-top:1.8rem;padding-top:1.8rem;border-top:1px solid var(--b)}
+.soc{width:42px;height:42px;border-radius:3px;display:flex;align-items:center;
+  justify-content:center;border:1px solid var(--b);color:var(--g);transition:all .25s}
+.soc:hover{transform:translateY(-2px)}
+.soc.fb:hover{color:#1877F2;border-color:#1877F2;background:#EDF4FE}
+.soc.ig:hover{color:#E1306C;border-color:#E1306C;background:#FDE8F0}
+.soc.tt:hover{color:#000;border-color:#000;background:#F0F0F0}
+.soc.wa:hover{color:#25D366;border-color:#25D366;background:#E8F8EE}
+.soc svg{width:19px;height:19px;fill:currentColor}
+.cform{background:var(--gp);border:1px solid var(--b);padding:2.2rem}
+.cform h3{font-size:1rem;font-weight:700;margin-bottom:.25rem}
+.cform p{font-size:.78rem;color:var(--g);font-weight:300;margin-bottom:1.7rem}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:.8rem}
+.fg{display:flex;flex-direction:column;gap:.33rem;margin-bottom:.8rem}
+.fg label{font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gl)}
+.fg input,.fg select,.fg textarea{background:var(--w);border:1px solid var(--b);
+  padding:.72rem .9rem;font-family:var(--f);font-size:.85rem;color:var(--d);
+  outline:none;border-radius:2px;width:100%;transition:border-color .2s,box-shadow .2s}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--c);box-shadow:0 0 0 3px rgba(0,152,168,.07)}
+.fg textarea{resize:vertical;min-height:100px}
+.fsub{width:100%;background:var(--c);color:var(--w);border:none;padding:.88rem;
+  font-family:var(--f);font-size:.84rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;cursor:pointer;border-radius:2px;margin-top:.4rem;
+  transition:background .2s,transform .2s}
+.fsub:hover{background:var(--cl);transform:translateY(-1px)}
+.ffb{display:none;margin-top:.75rem;padding:.72rem 1rem;border-radius:2px;font-size:.83rem;font-weight:500}
+.ffb.ok{background:rgba(0,152,168,.08);color:var(--c);border:1px solid rgba(0,152,168,.18)}
+.ffb.err{background:rgba(212,39,28,.07);color:var(--r);border:1px solid rgba(212,39,28,.14)}
+
+@media(max-width:1024px){
+  .ftop{grid-template-columns:1fr 1fr}
+  .ti-layout{grid-template-columns:1fr}
+  .ti-layout.rev{direction:ltr}
+  .cwrap{grid-template-columns:1fr}
+  .prod-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nm{display:none}.hbg{display:flex}.mmenu{display:block}
+  .prod-grid{grid-template-columns:1fr}
+  .frow{grid-template-columns:1fr}
+  .ftop{grid-template-columns:1fr}
+}
+
+.cont-hero{background:var(--d);padding:10vh 4vw 8vh;margin-top:68px;position:relative;overflow:hidden}
+.cont-hero::before{content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(0,152,168,0.05) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(0,152,168,0.05) 1px,transparent 1px);
+  background-size:50px 50px}
+.cont-hero-inner{position:relative;z-index:1;max-width:600px}
+.cont-hero .ey{color:rgba(0,180,198,.8)}
+.cont-hero .st{color:var(--w);margin-bottom:.8rem}
+.cont-hero p{font-size:.92rem;font-weight:300;color:rgba(255,255,255,.5);line-height:1.8}
+
+/* Anti-copy */
+body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+img{-webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;-o-user-drag:none;pointer-events:none}
+</style>
+</head>
+<body><div style="background:#1A1A2A;color:rgba(255,255,255,0.7);text-align:center;padding:.5rem;font-size:.72rem;font-family:sans-serif;letter-spacing:.1em;position:fixed;top:0;left:0;right:0;z-index:9999;border-bottom:2px solid #0098A8">
+🔒 ANTEPRIMA RISERVATA — SiVA Italia &nbsp;|&nbsp; Non distribuire &nbsp;|&nbsp; <a href="login.html" style="color:#0098A8;text-decoration:none;font-weight:600">Esci</a>
+</div>
+<div style="height:32px"></div>
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo"><img src="data:image/jpeg;base64,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wbC/8Ekyd4+FHicMGJ3/APCbXpJyMEElySDx1Pbg1+hFFAXZ+e//ABDCf8EkW5k+E3idiVKlm8cXxJB69ZO/f357DAP+DYP/AIJIhlZfhP4nXbgAL43vRgAEbR8/A+noOeK/QiigLs/Pj/iGG/4JJc5+FHijk848cXw/D/WdOB+Q9BSH/g2F/wCCSW/enwn8Tr14Hji+6k5J/wBZ6fLjoB2r9CKKAuz8+P8AiGF/4JI7Sv8AwqXxMMkAY8bX2AoBAXG/BGDySCT644r2L9jf/gjR/wAE9v2E/Hj/ABV/Z/8AgcLfxT5MsNv4h1rVri/ubSKRSsiQGZ2WEMrMpZFVirFSxXivqWigLsKKCM96KCVfqFFFFAwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/Z" alt="SiVA Italia"></a>
+  <ul class="nm">
+    <li><a href="index.html" >Home</a></li>
+    <li><a href="chi-siamo.html" >Chi Siamo</a></li>
+    <li><a href="#" >Servizi <span class="ar">▾</span></a><div class="dd"><a href="cartotecnica.html">Cartotecnica &amp; Packaging</a><a href="etichette.html">Etichette</a><a href="serigrafia.html">Serigrafia</a><a href="litografia.html">Litografia Offset</a><a href="digitale.html">Stampa Digitale</a><a href="grafica.html">Ufficio Grafico</a></div></li>
+    <li><a href="contatti.html" class='act'>Contatti</a></li>
+    <li><a href="contatti.html" class="ncta">Preventivo</a></li>
+  </ul>
+  <div class="hbg" id="hbg"><span></span><span></span><span></span></div>
+</nav>
+<div class="mmenu" id="mmenu"><a href="index.html">Home</a>
+    <a href="chi-siamo.html">Chi Siamo</a>
+    <a href="#">Servizi</a>
+    <a href="cartotecnica.html" class="ms">→ Cartotecnica &amp; Packaging</a><a href="etichette.html" class="ms">→ Etichette</a><a href="serigrafia.html" class="ms">→ Serigrafia</a><a href="litografia.html" class="ms">→ Litografia Offset</a><a href="digitale.html" class="ms">→ Stampa Digitale</a><a href="grafica.html" class="ms">→ Ufficio Grafico</a>
+    <a href="contatti.html">Contatti</a></div>
+
+<section class="cont-hero">
+  <div class="cont-hero-inner">
+    <div class="ey rv">Contattaci</div>
+    <h1 class="st rv">Parliamo del tuo <span class="ac">progetto.</span></h1>
+    <p class="rv">Compila il modulo o contattaci direttamente. Risponderemo entro 24 ore lavorative con una valutazione tecnica e un preventivo su misura.</p>
+  </div>
+</section>
+<section class="sec">
+  <div class="cwrap">
+    <div>
+      <div class="ey rv">Dove siamo</div>
+      <h2 class="st rv" style="font-size:clamp(1.5rem,2.8vw,2.2rem)">SiVA ITALIA srl</h2>
+      <p style="font-family:var(--sc);font-size:1.25rem;color:var(--gl);margin:1rem 0 2rem;line-height:1.4" class="rv">Siamo a tua disposizione.</p>
+      <div class="cdet rv"><div class="cico"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="ctxt"><strong>Sede</strong><span>Via Egitto, 26 — Montesilvano (Pescara)</span></div></div>
+      <div class="cdet rv"><div class="cico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div class="ctxt"><strong>Telefono</strong><span>085 4685665</span></div></div>
+      <div class="cdet rv"><div class="cico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div class="ctxt"><strong>WhatsApp</strong><span>335 1385932</span></div></div>
+      <div class="cdet rv"><div class="cico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="ctxt"><strong>Email</strong><span>info@sivaitalia.com</span></div></div>
+      <div class="cdet rv"><div class="cico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="ctxt"><strong>Sito Web</strong><span>www.sivaitalia.com</span></div></div>
+      <div class="socrow rv">
+        <a href="#" class="soc fb" title="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" class="soc ig" title="Instagram"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg></a>
+        <a href="#" class="soc tt" title="TikTok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34l-.01-8.77a8.17 8.17 0 0 0 4.78 1.54V4.63a4.85 4.85 0 0 1-1-.06z"/></svg></a>
+        <a href="https://wa.me/393351385932" class="soc wa" title="WhatsApp"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+      </div>
+    </div>
+    <div class="cform rvr">
+      <h3>Richiedi un preventivo</h3>
+      <p>Compila il modulo e ti risponderemo entro 24 ore lavorative.</p>
+      <div class="frow">
+        <div class="fg"><label>Nome *</label><input type="text" id="fn" placeholder="Mario Rossi"></div>
+        <div class="fg"><label>Azienda</label><input type="text" id="fa" placeholder="Nome azienda"></div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label>Email *</label><input type="email" id="fe" placeholder="mario@azienda.it"></div>
+        <div class="fg"><label>Telefono</label><input type="tel" id="ft" placeholder="+39 333 000 0000"></div>
+      </div>
+      <div class="fg">
+        <label>Servizio di interesse</label>
+        <select id="fs">
+          <option value="">Seleziona...</option>
+          <option>Cartotecnica &amp; Packaging</option>
+          <option>Etichette</option>
+          <option>Serigrafia</option>
+          <option>Litografia Offset</option>
+          <option>Stampa Digitale — Piccolo Formato</option>
+          <option>Stampa Digitale — Grande Formato</option>
+          <option>Ufficio Grafico</option>
+          <option>Più servizi</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Descrivi il progetto *</label>
+        <textarea id="fm" placeholder="Materiale, quantità, scadenze, finiture speciali..."></textarea>
+      </div>
+      <div id="ffb" class="ffb"></div>
+      <button class="fsub" id="fsub">Invia Richiesta →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ftop">
+    <div class="ftbrand"><img src="data:image/jpeg;base64,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wbC/8Ekyd4+FHicMGJ3/APCbXpJyMEElySDx1Pbg1+hFFAXZ+e//ABDCf8EkW5k+E3idiVKlm8cXxJB69ZO/f357DAP+DYP/AIJIhlZfhP4nXbgAL43vRgAEbR8/A+noOeK/QiigLs/Pj/iGG/4JJc5+FHijk848cXw/D/WdOB+Q9BSH/g2F/wCCSW/enwn8Tr14Hji+6k5J/wBZ6fLjoB2r9CKKAuz8+P8AiGF/4JI7Sv8AwqXxMMkAY8bX2AoBAXG/BGDySCT644r2L9jf/gjR/wAE9v2E/Hj/ABV/Z/8AgcLfxT5MsNv4h1rVri/ubSKRSsiQGZ2WEMrMpZFVirFSxXivqWigLsKKCM96KCVfqFFFFAwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/Z" alt="SiVA Italia">
+    <p><strong>SiVA ITALIA srl</strong><br>Industria grafica dal 1963.<br><br>Via Egitto, 26 — Montesilvano (Pescara)</p></div>
+    <div class="ftcol"><h4>Servizi</h4><ul>
+      <li><a href='cartotecnica.html'>Cartotecnica &amp; Packaging</a></li><li><a href='etichette.html'>Etichette</a></li><li><a href='serigrafia.html'>Serigrafia</a></li><li><a href='litografia.html'>Litografia Offset</a></li><li><a href='digitale.html'>Stampa Digitale</a></li><li><a href='grafica.html'>Ufficio Grafico</a></li>
+    </ul></div>
+    <div class="ftcol"><h4>Azienda</h4><ul>
+      <li><a href="chi-siamo.html">Chi Siamo</a></li>
+      <li><a href="contatti.html">Contatti</a></li>
+    </ul></div>
+    <div class="ftcol"><h4>Contatti</h4><ul>
+      <li><a href="tel:0854685665">085 4685665</a></li>
+      <li><a href="tel:3351385932">335 1385932</a></li>
+      <li><a href="mailto:info@sivaitalia.com">info@sivaitalia.com</a></li>
+    </ul></div>
+  </div>
+  <div class="fbot">
+    <span>© 2025 SiVA ITALIA srl — Via Egitto 26, Montesilvano (PE)</span>
+    <span style="font-style:italic">industria grafica dal 1963</span>
+  </div>
+</footer>
+<script>
+const nav=document.querySelector('.nav');
+if(nav) window.addEventListener('scroll',()=>nav.classList.toggle('sc',scrollY>30));
+const hbg=document.getElementById('hbg'),mm=document.getElementById('mmenu');
+if(hbg&&mm){
+  hbg.addEventListener('click',()=>{mm.classList.toggle('op');hbg.classList.toggle('op')});
+  mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mm.classList.remove('op');hbg.classList.remove('op')}));
+}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vi');obs.unobserve(x.target)}}),{threshold:0.08});
+document.querySelectorAll('.rv,.rvl,.rvr').forEach(el=>obs.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();window.scrollTo({top:t.offsetTop-68,behavior:'smooth'})}
+  });
+});
+// Form
+const fsub=document.getElementById('fsub');
+if(fsub) fsub.addEventListener('click',function(){
+  const n=document.getElementById('fn')?.value.trim();
+  const em=document.getElementById('fe')?.value.trim();
+  const m=document.getElementById('fm')?.value.trim();
+  const fb=document.getElementById('ffb');
+  if(!n||!em||!m){if(fb){fb.textContent='Compila Nome, Email e Messaggio.';fb.className='ffb err';fb.style.display='block';}return}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){if(fb){fb.textContent='Email non valida.';fb.className='ffb err';fb.style.display='block';}return}
+  this.textContent='Invio...';this.disabled=true;
+  setTimeout(()=>{
+    if(fb){fb.textContent='✓ Messaggio inviato! Ti risponderemo entro 24 ore.';fb.className='ffb ok';fb.style.display='block';}
+    this.textContent='Inviato ✓';this.style.background='#2a7a4e';
+    ['fn','fa','fe','ft','fs','fm'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+    setTimeout(()=>{this.textContent='Invia Richiesta →';this.style.background='';this.disabled=false;if(fb)fb.style.display='none'},5000);
+  },1200);
+});
+</script>
+<script>
+// Anti-copy & anti-inspect
+(function(){
+  // Disabilita tasto destro
+  document.addEventListener('contextmenu',function(e){e.preventDefault();return false});
+  // Disabilita selezione testo
+  document.addEventListener('selectstart',function(e){e.preventDefault();return false});
+  // Disabilita drag immagini
+  document.addEventListener('dragstart',function(e){e.preventDefault();return false});
+  // Disabilita shortcut comuni
+  document.addEventListener('keydown',function(e){
+    if(e.ctrlKey&&(e.key==='s'||e.key==='u'||e.key==='c'||e.key==='a'||e.key==='p')){e.preventDefault();return false}
+    if(e.key==='F12'){e.preventDefault();return false}
+    if(e.ctrlKey&&e.shiftKey&&(e.key==='I'||e.key==='J'||e.key==='C')){e.preventDefault();return false}
+  });
+  // Redirect se DevTools aperto (rileva dimensione finestra)
+  var t=function(){if(window.outerWidth-window.innerWidth>160||window.outerHeight-window.innerHeight>160){document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;background:#F5F7F9"><div style="text-align:center"><div style="font-size:3rem;margin-bottom:1rem">🔒</div><p style="color:#1A1A2A;font-weight:600">Accesso non autorizzato</p></div></div>'}};
+  setInterval(t,1000);
+  // Watermark nel titolo
+  document.title='SiVA Italia — Anteprima Riservata';
+})();
+</script>
+</body>
+</html>
